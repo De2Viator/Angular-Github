@@ -8,6 +8,7 @@ import { ListComponent } from '../search/list.component';
 import { RepoComponent } from '../repo/repos.component';
 import { AppComponent } from './app.component';
 import { RepoChildComponent } from'../repo/repos.child.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes =[
     { path:'', component: SearchComponent},
@@ -15,7 +16,7 @@ const appRoutes: Routes =[
 ]
 
 @NgModule({
-    imports:      [ BrowserModule, HttpClientModule, FormsModule, RouterModule.forRoot(appRoutes)],
+    imports:      [ BrowserModule, HttpClientModule, FormsModule, RouterModule.forRoot(appRoutes), NgbModule],
     declarations: [ SearchComponent, ListComponent, AppComponent, RepoChildComponent, RepoComponent],
     bootstrap:    [ AppComponent ]
 })

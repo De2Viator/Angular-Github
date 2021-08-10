@@ -1,6 +1,6 @@
 
 import { Component } from "@angular/core";
-import { SearchService } from '../list/search.service'
+import { SearchService } from '../source/app.service'
 import { User } from "../models/user";
 
 @Component({
@@ -26,7 +26,7 @@ import { User } from "../models/user";
   </div>
 
   <div *ngIf="users?.length == 0">
-  <h4> Users Not Found </h4>
+  <h6> Users Not Found </h6>
   </div>
 
   <div id="userTable">

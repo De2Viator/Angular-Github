@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService} from './search.service';  
+import { SearchService} from '../source/app.service';  
 
 @Component({
     selector: 'search-comp',
@@ -9,12 +9,12 @@ import { SearchService} from './search.service';
       color: black }`],
       
     template: `
-    <h3> Searched User: </h3>
+    <h5> Searched User: </h5>
     
     <list-comp> Поиск </list-comp>
 
     <hr>
-    <h3> All User: </h3>
+    <h5> All User: </h5>
 
     <div id="userTable">
     <ul *ngFor='let user of users'> 
@@ -24,12 +24,10 @@ import { SearchService} from './search.service';
     </li>
     </ul>
     </div>`,
-    providers:[ SearchService ]
-
-                
-})
+    providers:[ SearchService ] })
 export class SearchComponent implements OnInit {
     public users = [];
+    
     constructor(private http: SearchService){ } 
 
     ngOnInit(){
