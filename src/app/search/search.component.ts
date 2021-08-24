@@ -6,26 +6,22 @@ import { User } from "../models/user";
 @Component({
   selector:'list-comp',
   styles:[`.userSearch { width:100%;}
-
     .invalid-bottom {border-top:solid red 2px; }
-
     .invalid-top{border-bottom:solid red 2px;}
-
     #userTable{ column-count:2}
-
      a { text-decoration: none;
          color: black }`],
   
   template:`
-  <div *ngIf="users?.length == 0" class="invalid-top">
+  <div *ngIf="users?.length == 0" class="invalid-top" [hidden]="searchBar.value==''">
   </div>
 
-  <input type="text" class="userSearch" [(ngModel)]="userSearch"  (ngModelChange)="searchUser()" /> 
+  <input type="text" class="userSearch" #searchBar [(ngModel)]="userSearch"  (ngModelChange)="searchUser()" /> 
 
-  <div *ngIf="users?.length == 0" class="invalid-bottom">
+  <div *ngIf="users?.length == 0" class="invalid-bottom" [hidden]="searchBar.value==''">
   </div>
 
-  <div *ngIf="users?.length == 0">
+  <div *ngIf="users?.length == 0" [hidden]="searchBar.value==''">
   <h6> Users Not Found </h6>
   </div>
 
@@ -40,12 +36,12 @@ import { User } from "../models/user";
   `,
   providers:[SearchService]
 })
-export class ListComponent{
+export class SearchComponent{
   userSearch: string = "";
   users:User[] = [];
   constructor (private http: SearchService) { }
 
-//Поиск пользователя 
+//Search User
   searchUser(){
     this.http.searchUsers(this.userSearch).subscribe((data: User[]) => {
       this.users=data;

@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { User } from "../models/user";
 import { Repo } from '../models/repo';
 import { map } from 'rxjs/operators';
-
+import { Item } from '../models/item';
 @Injectable()
 export class SearchService{
     constructor(private http: HttpClient){}
@@ -23,11 +23,24 @@ export class SearchService{
     }
 
     getRepo(login: string): Observable<Repo[]>{
-        return this.http.get<Repo[]>('https://api.github.com/users/'+ login + '/repos');
+        return this.http.get<Repo[]>('https://api.github.com/users/'+ login + '/repos').pipe(map((data:any)=>{
+            let userRepos = data;
+            return userRepos.map(function (repo: any): Repo{
+                return new Repo(repo.name, repo.description, repo.language, repo.html_url, repo.has_issues, repo.id )
+            });
+        }));
     }
 
-    selectRepo(name: string, repo: string): Observable<Repo>{
-        return this.http.get<Repo>('https://api.github.com/repos/'+ name +'/'+ repo).pipe(map((data:any)=>{
-            let userRepo = data;
-            return userRepo.map(function (repo: any): Repo{
-                return new Repo(repo.name, repo.description, repo.language, repo.html_url
+    loadRepo(): Observable<Item[]>{
+        return this.http.get<Item[]>('http://localhost:3000/favouriteRepo')
+    }
+
+    likeRepo(repo: Repo) {
+        const body = {name: repo.name, id:repo.id}
+        return this.http.post('http://localhost:3000/favouriteRepo', body)
+    }
+
+    deleteRepo(id:number){
+        return this.http.delete('http://localhost:3000/favouriteRepo' + '/' + id)
+    }
+}
