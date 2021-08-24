@@ -41,6 +41,7 @@ import { SearchService} from '../source/app.service';
     </li>
     </ul>
     </div>`,
+    
     providers:[ SearchService ] })
 export class ListComponent implements OnInit {
     public users = [];
