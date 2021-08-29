@@ -104,6 +104,7 @@ export class RepoComponent {
 //Choosen Repo
 selectRepo(data){
   this.reposFiltered = data;
+  console.log(data);
 }
 
 likeRepo(){
