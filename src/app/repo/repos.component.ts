@@ -23,7 +23,7 @@ import { Repo } from '../models/repo';
 
   <div>
     <ul>
-     <li *ngFor="let repo of repos; index as i" (click)="selectRepo(repo, i)   (click)="open(content)">
+     <li *ngFor="let repo of repos; index as i" (click)="selectRepo(repo, i)"   (click)="open(content)">
        {{repo.name}}
        <button (click)="selectRepo(repo, i)" (click)="likeRepo()">
        <svg xmlns="http://www.w3.org/2000/svg"  width="16" height="16" id="star" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
