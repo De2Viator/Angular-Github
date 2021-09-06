@@ -12,28 +12,7 @@ import { User } from "../models/user";
      a { text-decoration: none;
          color: black }`],
   
-  template:`
-  <div *ngIf="users?.length == 0" class="invalid-top" [hidden]="searchBar.value==''">
-  </div>
-
-  <input type="text" class="userSearch" #searchBar [(ngModel)]="userSearch"  (ngModelChange)="searchUser()" /> 
-
-  <div *ngIf="users?.length == 0" class="invalid-bottom" [hidden]="searchBar.value==''">
-  </div>
-
-  <div *ngIf="users?.length == 0" [hidden]="searchBar.value==''">
-  <h6> Users Not Found </h6>
-  </div>
-
-  <div id="userTable">
-  <ul>
-  <li *ngFor="let user of users">
-  <a routerLink="/repos/{{user?.name}}" ><img height="100px" src={{user?.avatar}}/></a>
-  <a routerLink="/repos/{{user?.name}}">{{user?.name}}</a>
-  </li>
-  </ul>
-  </div> 
-  `,
+  templateUrl:`../html/search.component.html`,
   providers:[SearchService]
 })
 export class SearchComponent{
