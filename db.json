@@ -1,12 +1,4 @@
 {
   "favouriteRepo": [
-    {
-      "name": "activerecordless_migrations",
-      "id": 3835254
-    },
-    {
-      "name": "cassandra-munin-plugins",
-      "id": 646043
-    }
   ]
 }
