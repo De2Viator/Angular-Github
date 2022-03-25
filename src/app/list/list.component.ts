@@ -1,45 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService} from '../source/app.service';  
+import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../api.service";
+import { IRepo } from '../models/repo';
 
 @Component({
-    selector: 'search-comp',
-
-    styles:[`#userTable { column-count:2; }
-    a { text-decoration: none;
-      color: black }
-      
-      #deleteStar{
-        cursor:pointer;
-        color:red;
-      }`],
-      
-    templateUrl:`../html/list.component.html` ,
-    
-    providers:[ SearchService ] })
+  selector: 'app-list',
+  styleUrls:['list.component.scss'],
+  templateUrl: 'list.component.html',
+})
 export class ListComponent implements OnInit {
-    public users = [];
-    isDeleted: boolean = false;
-    public likedRepos = [];
-    
-    constructor(private http: SearchService){ } 
+  users = [];
+  isDeleted: boolean = false;
+  likedRepos = [];
 
-    ngOnInit(){
-      this.http.getUsers().subscribe(data => {
-        this.users = data;
-        console.log(data);
-      })
-    }
+  constructor(private http: ApiService) {}
 
-    loadRepos(){
-      this.http.loadRepo().subscribe(data =>{
-        this.likedRepos = data;
-        console.log(data);
-      })
-    }
+  ngOnInit() {
+    this.http.getUsers().subscribe((data) => {
+      this.users = data;
+    });
+  }
 
-    deleteRepos(id:number){
-      this.http.deleteRepo(id).subscribe(data=>{
-          console.log(data);
-      })
+  loadRepos() {
+    this.http.loadRepo().subscribe((data) => {
+      this.likedRepos = data;
+    });
+  }
+
+  deleteRepos(id: number) {
+    new Promise((resolve,reject)=> {
+      this.http.deleteRepo(id).subscribe();
+      resolve(true);
+    }).then((data) => {
+      this.loadRepos()
+    })
   }
 }

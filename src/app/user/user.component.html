@@ -1,0 +1,6 @@
+<li class="list-group-item">
+  <a [routerLink]="['/repos/', user.login]">
+    <img height="100px" [src]="user.avatar_url" />
+    <p>{{ user.login }}</p>
+  </a>
+</li>

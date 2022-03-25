@@ -1,3 +1,4 @@
-export class User{
-    constructor(public name:string, public avatar:string ){ }
+export class IUser{
+    login:string
+    avatar_url:string 
 }

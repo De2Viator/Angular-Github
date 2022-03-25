@@ -1,29 +1,25 @@
 
-import { Component } from "@angular/core";
-import { SearchService } from '../source/app.service'
-import { User } from "../models/user";
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { ApiService } from "../api.service";
+import { IUser } from "../models/user";
 
 @Component({
-  selector:'list-comp',
-  styles:[`.userSearch { width:100%;}
-    .invalid-bottom {border-top:solid red 2px; }
-    .invalid-top{border-bottom:solid red 2px;}
-    #userTable{ column-count:2}
-     a { text-decoration: none;
-         color: black }`],
-  
-  templateUrl:`../html/search.component.html`,
-  providers:[SearchService]
+  selector:'app-search',
+  styleUrls:['search.component.scss'],
+  templateUrl:'search.component.html'
 })
 export class SearchComponent{
   userSearch: string = "";
-  users:User[] = [];
-  constructor (private http: SearchService) { }
+  users:IUser[] = [];
+  @ViewChild('searchBar') search:ElementRef;
+  constructor (private http: ApiService) { }
 
 //Search User
   searchUser(){
-    this.http.searchUsers(this.userSearch).subscribe((data: User[]) => {
-      this.users=data;
-      console.log(data)});
-    }
+    this.http.searchUsers(this.userSearch).subscribe(data => {
+      this.users = data['items'];
+    }, error => {
+      this.users = [];
+    })
+  }
 }

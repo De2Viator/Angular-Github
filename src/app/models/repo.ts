@@ -1,3 +1,8 @@
-export class Repo{
-    constructor(public name:string, public description:string, public language: string, public html:string, public issues:string, public id:string ){ }
+export interface IRepo{
+    name:string,  
+    description:string, 
+    language: string,
+    html:string, 
+    issues:string, 
+    id:string 
 }

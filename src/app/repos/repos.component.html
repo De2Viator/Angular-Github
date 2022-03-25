@@ -1,0 +1,39 @@
+<div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let repo of repos"  >
+      <app-repo (click)="open(content)" [repo]="repo" (click)='selectRepo(repo)'>
+      </app-repo>
+        <i class="bi bi-star text-warning" (click)="likeRepo(repo)"></i>
+    </li>
+  </ul>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <ul *ngFor="let filtered of reposFiltered | keyvalue">
+        <li *ngIf="filtered.key == 'name'">{{ filtered.value }}</li>
+      </ul>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <ul *ngFor="let filtered of reposFiltered | keyvalue">
+          <li *ngIf="filtered.key === 'description'">{{ filtered.value }}</li>
+          <li *ngIf="filtered.key ==='language'">{{ filtered.value }}</li>
+          <li *ngIf="filtered.key === 'html_url'">
+            <a [href]="filtered.value"> {{ filtered.value }} </a>
+          </li>
+          <li *ngIf="filtered.key === 'has_issues'">
+            <span>Issues:</span> 
+            <i class="bi bi-x-lg" *ngIf="filtered.value === false"></i>
+            <i *ngIf="filtered.value === true" class="bi bi-check-lg"></i>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,18 @@
+<h5>Searched User:</h5>
+<app-search> Поиск </app-search>
+<h5>All User:</h5>
+<div id="userTable">
+  <ul  class="list-group"> 
+    <app-user *ngFor="let user of users" [user]="user">
+    </app-user> 
+  </ul>
+</div>
+<button class="btn btn-primary" (click)="loadRepos()">Favourite Repo</button>
+<div>
+  <ul *ngFor="let repo of likedRepos" class="list-group">
+    <li class="list-group-item">
+      <app-repo [repo]="repo"></app-repo>
+      <i class="bi bi-trash" (click)="deleteRepos(repo.id)"></i>
+    </li>
+  </ul>
+</div>

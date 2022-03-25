@@ -1,0 +1,9 @@
+
+<input type="text" class="w-100 from-control" #searchBar="ngModel" [ngClass]="{'invalid':users.length === 0 && searchBar.value !== ''}" 
+[(ngModel)]="userSearch" (ngModelChange)="searchUser()"  />
+<h6 *ngIf="users?.length == 0 && searchBar.value !== ''">Users Not Found</h6>
+<div id="userTable">
+  <ul>
+    <app-user *ngFor="let user of users" [user]="user"></app-user> 
+  </ul>
+</div>
